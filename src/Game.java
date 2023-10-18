@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Game extends PApplet {
     private int spawnEnemyTimer;
-    private int spawnArrowTimer;
     private int numEnemies;
     private ArrayList<Tower> towers;
     private ArrayList<Arrow> arrows;
@@ -16,7 +15,6 @@ public class Game extends PApplet {
 
     public void setup() {
         spawnEnemyTimer = 50;
-        spawnArrowTimer = 25;
         numEnemies = 10;
         towers = new ArrayList<>();
         arrows = new ArrayList<>();
@@ -33,25 +31,27 @@ public class Game extends PApplet {
                 t.draw(this);
             }
         }
+        for (Tower t : towers) {
+            arrows.add(t.shoot());
+        }
         spawnEnemies();
-        spawnArrows();
-//        for (Enemy e : enemies) {
-//            e.update();
-//            e.draw(this);
+        for (Enemy e : enemies) {
+            e.update();
+            e.draw(this);
 //            for (Arrow a : arrows) {
 //                a.update();
 //                a.draw(this);
-////                if (a.hitTarget(e)) {
-////                    arrows.remove(a);
-////                    e.isHit();
-////                    System.out.println("Hit Target");
-////                    if (e.isDead()) {
-////                        enemies.remove(e);
-////                        System.out.println("target died");
-////                    }
-////                }
-////            }
-//        }
+//                if (a.hitTarget(e)) {
+//                    arrows.remove(a);
+//                    e.isHit();
+//                    System.out.println("Hit Target");
+//                    if (e.isDead()) {
+//                        enemies.remove(e);
+//                        System.out.println("target died");
+//                    }
+//                }
+//            }
+        }
     }
 
     public void spawnEnemies() {
@@ -63,15 +63,6 @@ public class Game extends PApplet {
                 e.draw(this);
                 spawnEnemyTimer = 100;
                 numEnemies--;
-            }
-        }
-    }
-
-    public void spawnArrows() {
-        spawnArrowTimer--;
-        if (spawnArrowTimer <= 0) {
-            for (Tower t: towers) {
-                arrows.add(t.shoot());
             }
         }
     }

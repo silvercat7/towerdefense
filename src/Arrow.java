@@ -10,7 +10,7 @@ public class Arrow {
          this.up = up;
          this.x = x;
          this.y = y;
-         ySpeed = 1;
+         ySpeed = 5;
     }
 
     public void draw(PApplet window) {
@@ -19,11 +19,15 @@ public class Arrow {
     }
 
     public void update() {
-        y += ySpeed;
+        if (up ) {
+            y += ySpeed;
+        } else {
+            y -= ySpeed;
+        }
     }
 
     public boolean hitTarget(Enemy target) {
-        return this.x == target.getX() && this.y == target.getY();
+        return false;
     }
 
     public int getX() {
