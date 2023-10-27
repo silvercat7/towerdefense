@@ -3,16 +3,12 @@ import processing.core.PApplet;
 public class Tower {
     private int x;
     private int y;
-    private boolean up;
+    private boolean down;
 
     public Tower(int x, int y) {
         this.x = x;
         this.y = y;
-        if (y == 250) {
-            up = true;
-        } else {
-            up = false;
-        }
+        down = y == 250;
     }
 
     public void draw(PApplet window) {
@@ -21,7 +17,10 @@ public class Tower {
     }
 
     public Arrow shoot() {
-        return new Arrow(up, this.x, this.y);
+        if (down){
+            return new Arrow(down, this.x+25, this.y+50);
+        }
+        return new Arrow(down, this.x+25, this.y);
     }
 
     public int getX() {
