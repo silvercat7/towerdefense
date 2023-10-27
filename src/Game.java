@@ -44,6 +44,8 @@ public class Game extends PApplet {
             try {
                 BufferedReader in = new BufferedReader((new FileReader("../saveGame.txt")));
                 towers.clear();
+                enemies.clear();
+                arrows.clear();
                 String line;
                 while ((line = in.readLine()) != null) {
                     String[] vals = line.split(", ");
