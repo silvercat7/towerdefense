@@ -16,13 +16,6 @@ public class Tower {
         window.rect(x, y, 50, 50);
     }
 
-    public Arrow shoot() {
-        if (down){
-            return new Arrow(down, this.x+25, this.y+50);
-        }
-        return new Arrow(down, this.x+25, this.y);
-    }
-
     public int getX() {
         return x;
     }
