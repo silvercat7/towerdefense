@@ -2,7 +2,6 @@ import processing.core.PApplet;
 
 public class Player {
     private int x;
-    private int y;
     private int length;
     private int xSpeed;
 
@@ -23,12 +22,6 @@ public class Player {
 
     public int getX() {
         return x;
-    }
-
-    public int getY() {return y;}
-
-    public void died() {
-        x = -50;
     }
 
     public int getRadius() {
