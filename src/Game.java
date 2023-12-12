@@ -3,8 +3,6 @@ import java.util.ArrayList;
 
 public class Game extends PApplet {
     private boolean paused;
-    private int numLasers;
-    private int laserTimer;
     private int level;
     private ArrayList<Laser> lasers;
     private Player player;
@@ -26,7 +24,7 @@ public class Game extends PApplet {
         text("avoid the red lasers", 100, 150);
         text("press 'd' to move", 100, 200);
         text("press 'a' to stop", 100, 250);
-        text("press 'p' to start", 100, 300);
+        text("press 's' to start", 100, 300);
     }
 
     public void showLevel() {
@@ -82,11 +80,11 @@ public class Game extends PApplet {
     }
 
     public void keyReleased() {
-        if (key == 'p') {
+        if (key == 's') {
             paused = !paused;
         }
         if (key == 'r') {
-            level = 0;
+            level--;
             nextLevel();
         }
     }
