@@ -8,7 +8,7 @@ public class Player {
     public Player(int x) {
         this.x = x;
         length = 30;
-        xSpeed = 1;
+        xSpeed = 2;
     }
 
     public void draw(PApplet window) {

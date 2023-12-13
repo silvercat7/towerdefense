@@ -12,9 +12,9 @@ public class Laser {
         this.y = y;
         on = false;
         if (level <= 3) {
-            timeBetweenBlinks = 200;
-        } else if (level == 4) {
             timeBetweenBlinks = 150;
+        } else if (level == 4) {
+            timeBetweenBlinks = 100;
         } else {
             timeBetweenBlinks = 100;
         }

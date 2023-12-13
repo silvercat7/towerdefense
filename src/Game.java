@@ -25,7 +25,7 @@ public class Game extends PApplet {
         text("avoid the red lasers", 100, 150);
         text("press 'd' to move", 100, 200);
         text("press 'a' to stop", 100, 250);
-        text("press 's' to start", 100, 300);
+        text("press 's' to start (or pause and unpause)", 100, 300);
     }
 
     public void showLevel() {
@@ -51,27 +51,31 @@ public class Game extends PApplet {
 
     public void draw() {
         if (!paused) {
-            background(255);
-            drawRoad();
-            showLevel();
-            for (Laser l : lasers) {
-                l.update();
-                l.draw(this);
-                if (l.hitTarget(player)) {
-                    gameOver();
-                }
+            display();
+            endOfPeriod();
+        }
+    }
+
+    public void display() {
+        background(255);
+        drawRoad();
+        showLevel();
+        for (Laser l : lasers) {
+            l.update();
+            l.draw(this);
+            if (l.hitTarget(player)) {
+                gameOver();
             }
-            player.draw(this);
-            move();
-            if (moving) {
-                player.update();
-            }
-            if (player.getX() >= 1100) {
-                if (level == 5) {
-                    wonGame();
-                } else {
-                    nextLevel();
-                }
+        }
+        player.draw(this);
+    }
+
+    public void endOfPeriod() {
+        if (player.getX() >= 1100) {
+            if (level == 5) {
+                wonGame();
+            } else {
+                nextLevel();
             }
         }
     }
@@ -93,15 +97,8 @@ public class Game extends PApplet {
             level = 0;
             nextLevel();
         }
-    }
-
-    public void move() {
         if (key == 'd') {
-            moving = true;
             player.update();
-        }
-        if (key == 'a') {
-            moving = false;
         }
     }
 
@@ -148,6 +145,7 @@ public class Game extends PApplet {
         text("press 's' to restart at the beginning of this level", 220, 200);
         text("press 'r' to restart at level one", 330, 250);
     }
+
 
     public static void main(String[] args) {
         PApplet.main("Game");
