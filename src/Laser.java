@@ -1,10 +1,10 @@
 import processing.core.PApplet;
 
 public class Laser {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
     private boolean on;
-    private int timeBetweenBlinks;
+    private final int timeBetweenBlinks;
     private int blinkTimer;
 
     public Laser(int x, int y, int level) {

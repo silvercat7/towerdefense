@@ -2,8 +2,8 @@ import processing.core.PApplet;
 
 public class Player {
     private int x;
-    private int length;
-    private int xSpeed;
+    private final int length;
+    private final int xSpeed;
 
     public Player(int x) {
         this.x = x;

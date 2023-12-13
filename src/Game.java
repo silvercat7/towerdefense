@@ -7,6 +7,7 @@ public class Game extends PApplet {
     private ArrayList<Laser> lasers;
     private Player player;
     private boolean moving;
+    private boolean startOver;
 
     public void settings() {
         size(1100, 800);
@@ -53,16 +54,12 @@ public class Game extends PApplet {
             background(255);
             drawRoad();
             showLevel();
-            boolean gameOver = false;
             for (Laser l : lasers) {
                 l.update();
                 l.draw(this);
                 if (l.hitTarget(player)) {
-                    gameOver = true;
+                    gameOver();
                 }
-            }
-            if (gameOver) {
-                gameOver();
             }
             player.draw(this);
             move();
@@ -80,11 +77,20 @@ public class Game extends PApplet {
     }
 
     public void keyReleased() {
-        if (key == 's') {
-            paused = !paused;
+        if (!startOver) {
+            if (key == 's') {
+                paused = !paused;
+            }
+        } else {
+            if (key == 's') {
+                startOver = false;
+                level--;
+                nextLevel();
+            }
         }
         if (key == 'r') {
-            level--;
+            startOver = false;
+            level = 0;
             nextLevel();
         }
     }
@@ -99,7 +105,7 @@ public class Game extends PApplet {
         }
     }
 
-    public int getNumLasers(int level) {
+    public int getNumLasers() {
         if (level == 1) {
             return 5;
         } else if (level == 2) {
@@ -113,31 +119,34 @@ public class Game extends PApplet {
         paused = true;
         level++;
         background(255);
-        fill(0);
-        textSize(30);
-        text("level " + level, 100, 100);
+        showLevel();
         player = new Player(0);
         moving = false;
-        drawLasers(getNumLasers(level));
+        drawLasers(getNumLasers());
         instruction();
     }
 
     public void wonGame() {
         paused = true;
-        lasers.clear();
+        startOver = true;
+        level = 1;
         background(255);
         fill(0);
         textSize(60);
-        text("you won!", 400, 370);
+        text("congratulations! you won!", 200, 350);
+        textSize(30);
+        text("press 's' to play again", 380, 390);
     }
 
     public void gameOver() {
         paused = true;
+        startOver = true;
         fill(0);
         textSize(50);
-        text("game over  :(", 350, 200);
+        text("game over  :(", 375, 150);
         textSize(30);
-        text("press 'r' to restart", 375, 250);
+        text("press 's' to restart at the beginning of this level", 220, 200);
+        text("press 'r' to restart at level one", 330, 250);
     }
 
     public static void main(String[] args) {
