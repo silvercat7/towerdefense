@@ -67,6 +67,9 @@ public class Game extends PApplet {
                 gameOver();
             }
         }
+        if (key == 'd') {
+            player.update();
+        }
         player.draw(this);
     }
 
@@ -96,9 +99,6 @@ public class Game extends PApplet {
             startOver = false;
             level = 0;
             nextLevel();
-        }
-        if (key == 'd') {
-            player.update();
         }
     }
 
